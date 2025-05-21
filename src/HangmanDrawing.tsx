@@ -1,3 +1,4 @@
+import React from "react";
 const HEAD = (
   <div
     style={{
@@ -85,15 +86,19 @@ const LEFT_LEG = (
   />
 );
 
-export function HangmanDrawing() {
+const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG];
+
+type HangmanDrawingProps = {
+  numberOfGuessed: number;
+};
+
+export function HangmanDrawing({ numberOfGuessed }: HangmanDrawingProps) {
   return (
     <div style={{ position: "relative" }}>
-      {HEAD}
-      {BODY}
-      {RIGHT_ARM}
-      {LEFT_ARM}
-      {RIGHT_LEG}
-      {LEFT_LEG}
+      {BODY_PARTS.slice(0, numberOfGuessed).map((part, index) => (
+        <React.Fragment key={index}>{part}</React.Fragment>
+      ))}
+
       <div
         style={{
           height: "50px",
